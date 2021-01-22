@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
-namespace Consumption
+﻿namespace Consumption
 {
+    using System.Collections.ObjectModel;
+    using Xamarin.Forms;
+
     public partial class MainPage : ContentPage
     {
+        public ObservableCollection<string> Items { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
+
+            Items = new ObservableCollection<string>
+            {
+                "Dario", "Manuel", "Jorge", "Rafael", "Mario", "Alejandro"
+            };
         }
     }
 }

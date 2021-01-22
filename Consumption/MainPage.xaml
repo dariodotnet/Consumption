@@ -1,24 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="Consumption.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Consumption.MainPage">
+             x:Name="Main">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+    <Grid RowDefinitions="2*, 7*, 1*">
+
+        <Frame Padding="24"
+               BackgroundColor="#2196F3"
+               CornerRadius="0">
+            <Label FontSize="36"
+                   HorizontalTextAlignment="Center"
+                   Text="Welcome to Xamarin.Forms!"
+                   TextColor="White" />
         </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
 
+        <!--<CollectionView x:Name="CollectionView"
+                        Grid.Row="1"
+                        ItemsSource="{Binding Source={x:Reference Main}, Path=Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Grid BackgroundColor="LightPink">
+                        <Label Padding="24,32" Text="{Binding}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+
+        <ScrollView Grid.Row="1" Grid.RowSpan="2">
+            <ScrollView.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="12,0" />
+                    </Style>
+                </ResourceDictionary>
+            </ScrollView.Resources>
+            <StackLayout>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Dario" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Manuel" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Jorge" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Rafael" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Mario" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Fran" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Ricardo" />
+                </Grid>
+                <Grid BackgroundColor="LightPink">
+                    <Label Padding="24,32" Text="Hernan" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <BoxView Grid.Row="2" Color="Black">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0.0" Color="#00ffffff" />
+                    <GradientStop Offset="1.0" Color="#66000000" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+    </Grid>
 </ContentPage>
