@@ -1,20 +1,44 @@
 ﻿namespace Consumption
 {
-    using System.Collections.ObjectModel;
+    using System;
+    using System.Linq;
     using Xamarin.Forms;
 
     public partial class MainPage : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
-
         public MainPage()
         {
             InitializeComponent();
+        }
 
-            Items = new ObservableCollection<string>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var items = App.DataBase
+                .Table<Item>().ToList();
+
+
+            var tags = items.GroupBy(x => x.Tag)
+                                .Select(x => x.Key)
+                                .ToList();
+
+            TagPicker.ItemsSource = tags;
+
+            if (tags.Any())
             {
-                "Dario", "Manuel", "Jorge", "Rafael", "Mario", "Alejandro"
-            };
+                TagPicker.SelectedIndex = 0;
+
+                Items.ItemsSource = items.Where(x => x.Tag.Equals(tags[0]));
+            }
+        }
+
+        private void TagPicker_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selected = (string)TagPicker.SelectedItem;
+
+            Items.ItemsSource = App.DataBase
+                .Table<Item>().Where(x => x.Tag.Equals(selected)).ToList();
         }
     }
 }

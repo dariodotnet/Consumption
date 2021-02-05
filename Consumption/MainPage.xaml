@@ -2,17 +2,46 @@
 <ContentPage x:Class="Consumption.MainPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Consumption;assembly=Consumption"
              x:Name="Main">
 
-    <Grid RowDefinitions="2*, 7*, 1*">
+    <Grid RowDefinitions="2*, 7*, 1*" RowSpacing="0">
 
         <Frame Padding="24"
                BackgroundColor="#2196F3"
                CornerRadius="0">
             <Label FontSize="36"
                    HorizontalTextAlignment="Center"
-                   Text="Welcome to Xamarin.Forms!"
+                   Text="Welcome to Dario presents, FUN WITH FLAGS!"
                    TextColor="White" />
         </Frame>
+
+        <CollectionView x:Name="Items"
+                        Grid.Row="1"
+                        Grid.RowSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type model:Item}">
+                    <StackLayout Padding="12,12,12,0">
+                        <Label FontAttributes="Bold" Text="{Binding Tag}" />
+                        <Label Text="{Binding Description}" />
+                        <Label FontSize="Micro" Text="{Binding DateTime, StringFormat='{0:yyyy/MM/dd HH:mm}'}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Header>
+                <Grid HeightRequest="0" />
+            </CollectionView.Header>
+            <CollectionView.Footer>
+                <Grid HeightRequest="{Binding Source={x:Reference Footer}, Path=Height}" />
+            </CollectionView.Footer>
+        </CollectionView>
+
+        <BoxView x:Name="Footer"
+                 Grid.Row="2"
+                 BackgroundColor="#BFFFFFFF" />
+        <Picker x:Name="TagPicker"
+                Grid.Row="2"
+                Margin="8,0,0,0"
+                SelectedIndexChanged="TagPicker_OnSelectedIndexChanged" />
     </Grid>
 </ContentPage>
