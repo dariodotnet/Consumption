@@ -3,7 +3,8 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Consumption;assembly=Consumption"
-             x:Name="Main">
+             x:Name="Main"
+             x:DataType="{x:Type model:MainPage}">
 
     <Grid RowDefinitions="2*, 7*, 1*" RowSpacing="0">
 
@@ -18,7 +19,8 @@
 
         <CollectionView x:Name="Items"
                         Grid.Row="1"
-                        Grid.RowSpan="2">
+                        Grid.RowSpan="2"
+                        ItemsSource="{Binding ItemsCollection}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type model:Item}">
                     <StackLayout Padding="12,12,12,0">
@@ -31,6 +33,30 @@
             <CollectionView.Header>
                 <Grid HeightRequest="0" />
             </CollectionView.Header>
+            <CollectionView.EmptyView>
+                <Grid>
+                    <StackLayout Spacing="16" VerticalOptions="Center">
+                        <Label x:Name="EmptyListDescription"
+                               Margin="48,0"
+                               FontSize="Large"
+                               HorizontalTextAlignment="Center"
+                               Text="Añade tu primer registro de consumo"
+                               TextColor="#F2000000" />
+                        <Button x:Name="EmptyListButton"
+                                Padding="0"
+                                Background="#F22196F3"
+                                BorderColor="#F23F51B5"
+                                BorderWidth="1.5"
+                                CornerRadius="32"
+                                FontSize="48"
+                                HeightRequest="64"
+                                HorizontalOptions="Center"
+                                Text="+"
+                                TextColor="#FFFFFF"
+                                WidthRequest="64" />
+                    </StackLayout>
+                </Grid>
+            </CollectionView.EmptyView>
             <CollectionView.Footer>
                 <Grid HeightRequest="{Binding Source={x:Reference Footer}, Path=Height}" />
             </CollectionView.Footer>
