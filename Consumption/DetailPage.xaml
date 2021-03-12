@@ -2,11 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Consumption.DetailPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to details page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <ScrollView >
+        <StackLayout VerticalOptions="Center" Padding="24,0">
+            
+            <Entry x:Name="Tag" Placeholder="Type a tag" TextChanged="Tag_TextChanged"/>
+            
+            <Entry x:Name="Description" Placeholder="Type a description"/>
+            
+            <Entry x:Name="Quantity" Placeholder="Type a quantity" Keyboard="Numeric" TextChanged="Quantity_TextChanged"/>
+            
+            <DatePicker x:Name="DateTime" />            
+            
+            <Button x:Name="Save" 
+                    Text="Save" 
+                    Margin="0,16,0,0" 
+                    IsEnabled="False"
+                    Clicked="Save_Clicked"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>
