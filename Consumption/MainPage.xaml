@@ -11,10 +11,10 @@
         <Frame Padding="24"
                BackgroundColor="#2196F3"
                CornerRadius="0">
-            <Label FontSize="28"
+            <Label FontSize="36"
                    HorizontalTextAlignment="Center" 
                    VerticalTextAlignment="Center" 
-                   Text="Welcome to Dario presents, FUN WITH FLAGS!"
+                   Text="Check your consumptions"
                    TextColor="White" />
         </Frame>
 
@@ -25,7 +25,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type model:Item}">
                     <StackLayout Padding="12,12,12,0">
-                        <Label FontAttributes="Bold" Text="{Binding Tag}" />
+                        <Label FontAttributes="Bold" FontSize="Body" Text="{Binding Tag}" />
                         <Label Text="{Binding Description}" />
                         <Label FontSize="Micro" Text="{Binding DateTime, StringFormat='{0:yyyy/MM/dd HH:mm}'}" />
                     </StackLayout>
