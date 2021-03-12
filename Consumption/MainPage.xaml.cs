@@ -78,5 +78,10 @@
                 TagPicker.SelectedIndex = 0;
             }
         }
+
+        private async void EmptyListButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DetailPage());
+        }
     }
 }

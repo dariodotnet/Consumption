@@ -3,7 +3,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Consumption;assembly=Consumption"
-             x:Name="Main"
+             x:Name="Main" NavigationPage.HasNavigationBar="False"
              x:DataType="{x:Type model:MainPage}">
 
     <Grid RowDefinitions="2*, 7*, 1*" RowSpacing="0">
@@ -11,8 +11,9 @@
         <Frame Padding="24"
                BackgroundColor="#2196F3"
                CornerRadius="0">
-            <Label FontSize="36"
-                   HorizontalTextAlignment="Center"
+            <Label FontSize="28"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center" 
                    Text="Welcome to Dario presents, FUN WITH FLAGS!"
                    TextColor="White" />
         </Frame>
@@ -51,7 +52,7 @@
                                 FontSize="48"
                                 HeightRequest="64"
                                 HorizontalOptions="Center"
-                                Text="+"
+                                Text="+" Clicked="EmptyListButton_Clicked"
                                 TextColor="#FFFFFF"
                                 WidthRequest="64" />
                     </StackLayout>
