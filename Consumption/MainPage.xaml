@@ -19,7 +19,7 @@
         </Frame>
 
         <CollectionView x:Name="Items"
-                        Grid.Row="1"
+                        Grid.Row="1" SelectionMode="Single"
                         Grid.RowSpan="2"
                         ItemsSource="{Binding ItemsCollection}">
             <CollectionView.ItemTemplate>
@@ -67,8 +67,25 @@
                  Grid.Row="2"
                  BackgroundColor="#BFFFFFFF" />
         <Picker x:Name="TagPicker"
-                Grid.Row="2"
+                Grid.Row="2" 
                 Margin="8,0,0,0"
                 SelectedIndexChanged="TagPicker_OnSelectedIndexChanged" />
+        <Button x:Name="AddItemButton"
+                Padding="0"
+                Background="#F22196F3"
+                BorderColor="#F23F51B5"
+                BorderWidth="1.5"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                CornerRadius="32"
+                FontSize="48" 
+                Margin="24"
+                HeightRequest="64"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Text="+" 
+                Clicked="EmptyListButton_Clicked"
+                TextColor="#FFFFFF"
+                WidthRequest="64" />
     </Grid>
 </ContentPage>

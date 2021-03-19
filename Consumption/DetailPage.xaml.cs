@@ -1,11 +1,15 @@
 ﻿namespace Consumption
 {
+    using System;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailPage : ContentPage
     {
+        public event EventHandler<string> LastTag; 
+
         public DetailPage()
         {
             InitializeComponent();
@@ -44,8 +48,14 @@
             item.Tag = Tag.Text;
             item.Quantity = result;
             App.DataBase.Insert(item);
-
+            OnLastTag(item.Tag);
+            await Task.Delay(250);
             await Navigation.PopAsync();
+        }
+
+        protected virtual void OnLastTag(string e)
+        {
+            LastTag?.Invoke(this, e);
         }
     }
 }

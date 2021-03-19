@@ -8,6 +8,8 @@
 
     public partial class MainPage : ContentPage
     {
+        private DetailPage _detailPage;
+
         public ObservableCollection<Item> ItemsCollection { get; set; }
 
         public MainPage()
@@ -33,24 +35,39 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            LoadData();
 
-            //Checking the Items binding is working
-            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            //{
-            //    Device.BeginInvokeOnMainThread(() =>
-            //    {
-            //        ItemsCollection.Add(new Item
-            //        {
-            //            DateTime = DateTime.UtcNow,
-            //            Description = "Probando timer",
-            //            Id = 1,
-            //            Quantity = 1.24,
-            //            Tag = "Electricidad"
-            //        });
-            //    });
-            //    return false;
-            //});
+            if (_detailPage != null)
+            {
+                _detailPage.LastTag -= DetailPageOnLastTag;
+                _detailPage = null;
+            }
+
+            LoadData();
+        }
+
+        private void DetailPageOnLastTag(object sender, string e)
+        {
+            var items = App.DataBase
+                .Table<Item>().ToList();
+
+            var tags = items.GroupBy(x => x.Tag)
+                .Select(x => x.Key)
+                .ToList();
+
+            if (TagPicker.SelectedIndex >= 0)
+            {
+                var index = tags.IndexOf(e);
+
+                if (TagPicker.SelectedIndex != index)
+                {
+                    if (TagPicker.Items.Count != tags.Count)
+                    {
+                        TagPicker.ItemsSource = tags;
+                    }
+                    
+                    TagPicker.SelectedIndex = index;
+                }
+            }
         }
 
         private void TagPicker_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -63,25 +80,38 @@
 
         private void LoadData()
         {
-            var items = App.DataBase
-                .Table<Item>().ToList();
-
-
-            var tags = items.GroupBy(x => x.Tag)
-                .Select(x => x.Key)
-                .ToList();
-
-            TagPicker.ItemsSource = tags;
-
-            if (tags.Any())
+            try
             {
-                TagPicker.SelectedIndex = 0;
+                var items = App.DataBase
+                    .Table<Item>().ToList();
+
+
+                var tags = items.GroupBy(x => x.Tag)
+                    .Select(x => x.Key)
+                    .ToList();
+
+                if (TagPicker.ItemsSource == null || TagPicker.ItemsSource.Count != tags.Count)
+                {
+                    TagPicker.ItemsSource = tags;
+                }
+
+                if (tags.Any() && TagPicker.SelectedIndex < 0)
+                {
+                    TagPicker.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
         }
 
         private async void EmptyListButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DetailPage());
+            _detailPage = new DetailPage();
+            await Navigation.PushAsync(_detailPage);
+            
+            _detailPage.LastTag += DetailPageOnLastTag;
         }
     }
 }
